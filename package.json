@@ -1,0 +1,20 @@
+{
+  "name": "javascript-ast-interpreter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/makeworldbeautiful/javascript-ast-interpreter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/makeworldbeautiful/javascript-ast-interpreter/issues"
+  },
+  "homepage": "https://github.com/makeworldbeautiful/javascript-ast-interpreter#readme"
+}
