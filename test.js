@@ -1,6 +1,8 @@
 const acorn = require('./libs/acorn');
 const Scope = require('./cls/scope');
 
+const raiseError = require('./utils/error');
+const prescan = require('./main/prescan');
 const branches = require('./main/acorn-branches');
 const reduce = require('./main/reducer')(branches);
 
@@ -12,12 +14,20 @@ const test = (code) => {
     });
     const ast = acorn.parse(code);
     let OUTPUT;
-    ast.body.forEach(node => {
-        let val = reduce(node, scope);
-        if(typeof(val) !== 'undefined'){
-            OUTPUT = val;
-        }
-    });
+
+    prescan(ast.body, scope, reduce)
+
+    try {
+        ast.body.forEach(node => {
+            let val = reduce(node, scope);
+            if(typeof(val) !== 'undefined'){
+                OUTPUT = val;
+            }
+        });
+    } catch(err){
+        raiseError(err, code);
+    }
+    
 
     // console.log({ OUTPUT })
 
@@ -48,10 +58,15 @@ console.log(a)
 `;
 
 code = `
-console.log(b)
+console.log(a)
 var a = 1
+console.log(a)
 `;
+
+
+
 test(code);
 // console.log(topScope)
 
+// throw new ReferenceError('aaa')
 

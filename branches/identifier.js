@@ -6,7 +6,12 @@ module.exports = {
             // console.log(11111222, node.name, type, value)
             return value;
         } else {
-            return scope.getValue(node.name);
+            try {
+                return scope.getValue(node.name);
+            } catch(err){
+                err.message += ` #[${node.start},${node.end}]`;
+                throw err;
+            }
         }
     }
 }

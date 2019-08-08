@@ -40,14 +40,6 @@ class Scope {
         this.init(scope);
     }
 
-    get isTop(){
-        return !this.parent;
-    }
-
-    get topScope(){
-
-    }
-
     getTopScope(){
         if(!this.parent){
             return this;
@@ -92,7 +84,7 @@ class Scope {
     exists(id){
         if(this.scope.some(item => item.id === id)){
             return true;
-        } else if(!this.isTop){
+        } else if(this.parent){
             return this.parent.exists(id);
         } else {
             return false;
@@ -101,10 +93,14 @@ class Scope {
 
     get(id){
         let item = this.scope.find(it => it.id === id);
-        if(!item && !this.isTop){
+        if(!item && this.parent){
             item = this.parent.get(id);
         }
-        return item || null;
+        if(!item){
+            const err = new ReferenceError(`${id} is not defined`);
+            throw err;
+        }
+        return item;
     }
 
     getValue(id){
