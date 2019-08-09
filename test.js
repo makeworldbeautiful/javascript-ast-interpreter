@@ -15,15 +15,8 @@ const test = (code) => {
     const ast = acorn.parse(code);
     let OUTPUT;
 
-    prescan(ast.body, scope, reduce)
-
     try {
-        ast.body.forEach(node => {
-            let val = reduce(node, scope);
-            if(typeof(val) !== 'undefined'){
-                OUTPUT = val;
-            }
-        });
+        let val = reduce(ast, scope);
     } catch(err){
         raiseError(err, code);
     }
@@ -63,6 +56,20 @@ var a = 1
 console.log(a)
 `;
 
+code = `
+console.log(add(1,2))
+function add(a,b){
+    return a+b
+}
+`;
+
+code = `
+console.log(add(1,2))
+function add(a,b,c=0.1){
+    return z(a,b)+c
+    function z(a,b){return a+b}
+}
+`;
 
 
 test(code);

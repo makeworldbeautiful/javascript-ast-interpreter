@@ -1,5 +1,5 @@
 module.exports = {
-    types: ['Literal'],
+    types: ['Literal', 'StringLiteral', 'NumberLiteral'],
     reduce: (node) => {
         return node.value;
     }

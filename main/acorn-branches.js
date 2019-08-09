@@ -9,4 +9,7 @@ module.exports = [
     require('../branches/object-expression'),
     require('../branches/property'),
     require('../branches/assignment-expression'),
+    require('../branches/function-declaration'),
+    require('../branches/block-statement'),
+    require('../branches/return-statement'),
 ];

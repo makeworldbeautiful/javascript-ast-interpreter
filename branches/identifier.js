@@ -5,6 +5,8 @@ module.exports = {
             scope.setValue(node.name, value);
             // console.log(11111222, node.name, type, value)
             return value;
+        } else if(type === 'get'){
+            return node.name;
         } else {
             try {
                 return scope.getValue(node.name);
