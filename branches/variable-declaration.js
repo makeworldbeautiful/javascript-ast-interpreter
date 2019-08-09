@@ -1,9 +1,11 @@
 module.exports = {
     types: ['VariableDeclaration'],
     reduce: (node, scope, reduce) => {
-        let { kind, declarations } = node;
+        let { kind, declarations } = node, val, id;
         declarations.forEach(n => {
-            scope.set(kind, n.id.name, reduce(n.init, scope));
-        })
+            val = reduce(n.init, scope);
+            id = reduce(n.id, scope, 'get');
+            scope.set(kind, id, val);
+        });
     }
 }

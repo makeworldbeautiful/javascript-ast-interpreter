@@ -12,4 +12,8 @@ module.exports = [
     require('../branches/function-declaration'),
     require('../branches/block-statement'),
     require('../branches/return-statement'),
+    require('../branches/object-pattern'),
+    require('../branches/assignment-pattern'),
+    require('../branches/array-expression'),
+    require('../branches/array-pattern'),
 ];

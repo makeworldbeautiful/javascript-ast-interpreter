@@ -1,12 +1,12 @@
 module.exports = {
     types: ['Identifier'],
     reduce: (node, scope, reduce, type, value) => {
-        if(type === 'set'){
+        if(!scope || type === 'get'){
+            return node.name;
+        } else if(type === 'set'){
             scope.setValue(node.name, value);
             // console.log(11111222, node.name, type, value)
             return value;
-        } else if(type === 'get'){
-            return node.name;
         } else {
             try {
                 return scope.getValue(node.name);

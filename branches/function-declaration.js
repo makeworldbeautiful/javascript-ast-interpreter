@@ -1,30 +1,13 @@
-const initArguments = (params, args, scope, reduce) => {
-    params.forEach((param, i) => {
-        let initValue = args[i];
-        switch(param.type){
-            case 'Identifier':
-                scope.set('var', param.name, initValue);
-                break;
-            case 'AssignmentPattern':
-                if(i >= args.length){
-                    initValue = reduce(param.right, scope);
-                }
-                // if(typeof(initValue) === 'undefined'){
-                //     initValue = reduce(param.right, scope);
-                // }
-                scope.set('var', param.left.name, initValue);
-                break;
-            default:
-                console.log(param)
-                break;
-        }
-    })
-};
-
 const createFunction = (node, scope, reduce) => {
     const _scope = scope.createSub();
     const f = function(){
-        initArguments(node.params, arguments, _scope, reduce);
+        let id, args = Array.prototype.slice.call(arguments, 0);
+        node.params.forEach((param, i) => {
+            id = reduce(param, scope, 'get');
+            if(i < args.length){
+                _scope.set('var', id, args[i])
+            }
+        });
         return reduce(node.body, _scope);
     };
     if(node.id){

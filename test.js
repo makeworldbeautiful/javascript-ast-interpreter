@@ -2,7 +2,6 @@ const acorn = require('./libs/acorn');
 const Scope = require('./cls/scope');
 
 const raiseError = require('./utils/error');
-const prescan = require('./main/prescan');
 const branches = require('./main/acorn-branches');
 const reduce = require('./main/reducer')(branches);
 
@@ -18,6 +17,7 @@ const test = (code) => {
     try {
         let val = reduce(ast, scope);
     } catch(err){
+        throw err;
         raiseError(err, code);
     }
     
@@ -71,6 +71,29 @@ function add(a,b,c=0.1){
 }
 `;
 
+code = `
+const o = { a: 1, b: 2, c: { d: { e: 3 } } };
+var { a, c: { d: { e } } } = o;
+console.log(a,e)
+`;
+
+code = `
+const o = { a: 1, b: 2, c: { d: { e: 3 } } };
+const a = { aaa: 1 }
+a.c = o.c.d;
+show(a, 'ccccccc')
+function show({ c: a }, c = 0.2){
+    console.log('a:', a, c)
+}
+`;
+
+code = `
+let zz = { z: 1, b: [9,8,7] };
+let [{ a: aa }, b,c='ccccc']=[{ a: 1 }, zz];
+console.log(aa,b,c)
+`
+
+code = 'const a = 123;var b=`a:${123}`;console.log(a,b)'
 
 test(code);
 // console.log(topScope)

@@ -1,8 +1,8 @@
 module.exports = {
     types: ['CallExpression'],
-    reduce: (node, scope, reduce, context) => {
-        let callee = reduce(node.callee, scope);
+    reduce: (node, scope, reduce) => {
+        let callee = reduce(node.callee, scope, 'call');
         let args = node.arguments.map(n => reduce(n, scope));
-        return callee.apply(context, args);
+        return callee(args);
     }
 }
