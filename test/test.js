@@ -1,7 +1,6 @@
-
-const { cmd } = require('./index');
+const acorn = require('../libs/acorn')
+const cmd = require('../src/index').cmd(acorn);
 const code = require('./test-code');
-
 
 let output = cmd({
     // window: {},
@@ -11,5 +10,7 @@ let output = cmd({
 
 output.b(1)
 output.c.b(2)
+
+
 // throw new ReferenceError('aaa')
 

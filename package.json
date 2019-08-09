@@ -4,7 +4,10 @@
   "description": "",
   "main": "test.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "node test/test.js",
+    "test:build": "webpack --config webpack.test.config.js && node test/index.js",
+    "compile": "babel src --out-dir dist",
+    "build": "webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +19,13 @@
   "bugs": {
     "url": "https://github.com/makeworldbeautiful/javascript-ast-interpreter/issues"
   },
-  "homepage": "https://github.com/makeworldbeautiful/javascript-ast-interpreter#readme"
+  "homepage": "https://github.com/makeworldbeautiful/javascript-ast-interpreter#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "babel-loader": "^8.0.6",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6"
+  }
 }

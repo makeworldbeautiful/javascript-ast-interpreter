@@ -12,7 +12,7 @@ const createFunction = (node, scope, reduce, context) => {
         return reduce(node.body, _scope);
     };
     if(node.id){
-        f.name = node.id.name;
+        // f.name = node.id.name;
         _scope.set('function', node.id.name, f);
     }
     return f;
