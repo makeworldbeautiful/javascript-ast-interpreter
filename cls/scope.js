@@ -6,6 +6,7 @@ class ScopeItem {
         this.kind = kind;
         this.id = id;
         this.value = value;
+        this.context = null;
 
         // this.setValue = (val) => {
         //     return value = val;

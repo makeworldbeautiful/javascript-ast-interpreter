@@ -14,6 +14,8 @@ module.exports = {
         let { operator } = node;
         let left = reduce(node.left, scope);
         let right = reduce(node.right, scope);
-        return BINARY[operator](left, right);
+        let val = BINARY[operator](left, right);
+        // console.log(left, operator, right, val)
+        return val;
     }
 }
