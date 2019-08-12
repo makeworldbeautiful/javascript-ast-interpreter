@@ -151,6 +151,16 @@ class Scope {
             return null;
         }
     }
+
+    getContext(){
+        if(this.context){
+            return this.context;
+        } else if(this.parent){
+            return this.parent.context || null;
+        } else {
+            return null;
+        }
+    }
 }
 
 module.exports = Scope;

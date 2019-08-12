@@ -10,7 +10,7 @@ let output = cmd({
     Array,
 }, code);
 
-console.log(output)
+// console.log(output)
 
 
 // throw new ReferenceError('aaa')

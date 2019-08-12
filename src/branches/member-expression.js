@@ -6,7 +6,7 @@ module.exports = {
         if(type === 'set'){
             return obj[prop] = value;
         } else if(type === 'call') {
-            return function call(args){
+            return function call(...args){
                 return obj[prop].apply(obj, args);
             }
         } else {
