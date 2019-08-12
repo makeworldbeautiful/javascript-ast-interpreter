@@ -87,4 +87,65 @@ const obj = {
 module.exports = obj
 `
 
+code = `
+console.log(Object)
+`
+
+code = `
+console.log(Object.create(null))
+`
+
+code = `
+console.log(new Object({ a: 1 }))
+`
+
+code = `
+class A {
+    constructor(name){
+        // console.log(name, this);
+        this.name = name;
+        this._type = 'A';
+    }
+    getName(){
+        return this.name + ':' + this.type;
+    }
+    get type(){
+        return this._type;
+    }
+    set type(val){
+        this._type = val;
+    }
+}
+
+let a = new A(123);
+console.log(11111, a.getName(), a.type);
+
+class B extends A {
+    constructor(name){
+        super(name);
+        this._type = 'B';
+    }
+    get type(){
+        console.log(7777, this)
+        return super.type + ':' + this._type;
+    }
+}
+
+let b = new B(456);
+console.log(22222, b.getName(), b.type);
+
+// class C extends B {
+//     constructor(name){
+//         super(name);
+//         this._type = 'B';
+//     }
+// }
+
+// let b = new B('this is')
+// console.log(b.getName())
+
+`
+
+
+
 module.exports = code;

@@ -26,7 +26,6 @@ module.exports = {
         /**
          * - configuration.output.libraryTarget should be one of these:
    "var" | "assign" | "this" | "window" | "self" | "global" | "commonjs" | "commonjs2" | "commonjs-module" | "amd" | "amd-require" | "umd" | "umd2" | "jsonp" | "system"
-   -> Type of library
          */
         libraryTarget: 'this',
         // umdNamedDefine: true,

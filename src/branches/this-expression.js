@@ -1,6 +1,10 @@
 module.exports = {
     types: ['ThisExpression'],
     reduce: (node, scope, reduce) => {
-        return scope.context || null;
+        if(typeof(scope.context) === 'undefined'){
+            return null;
+        } else {
+            return scope.context;
+        }
     }
 }

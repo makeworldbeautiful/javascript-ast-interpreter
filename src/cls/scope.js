@@ -141,6 +141,16 @@ class Scope {
         })
         return r;
     }
+
+    getSuper(){
+        if(this.super){
+            return this.super;
+        } else if(this.parent){
+            return this.parent.super || null;
+        } else {
+            return null;
+        }
+    }
 }
 
 module.exports = Scope;

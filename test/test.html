@@ -13,25 +13,35 @@ cmd = cmd(acorn)
 const output = cmd({
     // window: {},
     console,
+    Object,
+    Array,
 }, `
-const obj = {
-    b: function a(v){
-        console.log(v, a, this)
-        var a;
-    },
-    c: {
-        b: function a(v){
-            console.log(v, this)
-        }
+class A {
+    constructor(name){
+        this.name = name;
+        this._type = 'A';
     }
-};
-// obj.b(1)
-// obj.c.b(1)
-// console.log(this)
-module.exports = obj
+    getName(){
+        return this.name;
+    }
+    get type(){
+        return this._type;
+    }
+    set type(val){
+        this._type = val;
+    }
+}
+
+class B extends A {
+    constructor(name){
+        super(name + ':B');
+    }
+}
+
+let b = new B('this is B')
+console.log(b.getName())
+
 `);
-output.b(1)
-output.c.b(2)
 </script>
 
 </body>

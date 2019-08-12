@@ -1,7 +1,7 @@
-const createFunction = (node, scope, reduce, context) => {
+const createFunction = (node, scope, reduce) => {
     const _scope = scope.createSub();
-    _scope.context = context;
     const f = function(){
+        _scope.context = this;
         let id, args = Array.prototype.slice.call(arguments, 0);
         node.params.forEach((param, i) => {
             id = reduce(param, scope, 'get');

@@ -20,4 +20,9 @@ module.exports = [
     require('../branches/template-literal'),
     require('../branches/template-element'),
     require('../branches/this-expression'),
+    require('../branches/new-expression'),
+    require('../branches/class-declaration'),
+    require('../branches/class-body'),
+    require('../branches/method-definition'),
+    require('../branches/super'),
 ];
