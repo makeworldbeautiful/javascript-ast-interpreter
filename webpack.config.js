@@ -20,7 +20,10 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: 'index.js'
+        filename: 'index.js',
+        // library: 'astInterpreter',
+        libraryTarget: 'umd',
+        // umdNamedDefine: true,
     },
     optimization: {
         minimize: true

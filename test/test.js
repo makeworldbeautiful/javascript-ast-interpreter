@@ -1,5 +1,5 @@
 const acorn = require('../libs/acorn')
-const cmd = require('../src/index').cmd(acorn);
+const cmd = require('../build/index').cmd(acorn);
 const code = require('./test-code');
 
 let output = cmd({

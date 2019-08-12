@@ -5,7 +5,6 @@
   "main": "test.js",
   "scripts": {
     "test": "node test/test.js",
-    "test:build": "webpack --config webpack.test.config.js && node test/index.js",
     "compile": "babel src --out-dir dist",
     "build": "webpack --config webpack.config.js"
   },

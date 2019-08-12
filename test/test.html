@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/acorn/6.2.1/acorn.min.js"></script> -->
+<script type="text/javascript" src="../libs/acorn/6.2.1/acorn.min.js"></script>
+<script type="text/javascript" src="../build/index.js"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+cmd = cmd(acorn)
+const output = cmd({
+    // window: {},
+    console,
+}, `
+const obj = {
+    b: function a(v){
+        console.log(v, a, this)
+        var a;
+    },
+    c: {
+        b: function a(v){
+            console.log(v, this)
+        }
+    }
+};
+// obj.b(1)
+// obj.c.b(1)
+// console.log(this)
+module.exports = obj
+`);
+output.b(1)
+output.c.b(2)
+</script>
+
+</body>
+</html>
