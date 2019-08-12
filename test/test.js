@@ -1,4 +1,4 @@
-const acorn = require('../libs/acorn')
+const acorn = require('../libs/acorn/6.2.1/acorn')
 const cmd = require('../build/index').cmd(acorn);
 const code = require('./test-code');
 
