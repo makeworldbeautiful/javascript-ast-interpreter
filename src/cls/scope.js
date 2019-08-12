@@ -1,4 +1,4 @@
-const { isObject, isArray } = require('../utils/type');
+const { isObject, isArray, isString } = require('../utils/type');
 
 class ScopeItem {
     constructor(kind, id, parent, value){
@@ -6,6 +6,7 @@ class ScopeItem {
         this.kind = kind;
         this.id = id;
         this.value = value;
+        this.context = null;
 
         // this.setValue = (val) => {
         //     return value = val;
@@ -56,15 +57,32 @@ class Scope {
     }
 
     set(kind, id, value){
-        let item = this.scope.find(it => it.id === id);
-        if(!item){
-            item = new ScopeItem(kind, id, this, value);
-            this.scope.unshift(item);
-        } else {
-            item.setValue(value);
-            item.setKind(kind);
+        if(isString(id)){
+            let item = this.scope.find(it => it.id === id);
+            if(!item){
+                item = new ScopeItem(kind, id, this, value);
+                this.scope.unshift(item);
+            } else {
+                item.setValue(value);
+                item.setKind(kind);
+            }
         }
-        return item;
+        // 对象解构赋值
+        else if(isObject(id)){
+            Object.keys(id).forEach(k => {
+                let _id = id[k];
+                let _value = value[k];
+                this.set(kind, _id,  _value);
+            })
+        }
+        else if(isArray(id)){
+            let len = value.length;
+            id.forEach((_id, i) => {
+                if(i < len){
+                    this.set(kind, _id,  value[i]);
+                }
+            })
+        }
     }
 
     setValue(id, value){
@@ -122,6 +140,16 @@ class Scope {
             r[id] = this.getValue(id);
         })
         return r;
+    }
+
+    getSuper(){
+        if(this.super){
+            return this.super;
+        } else if(this.parent){
+            return this.parent.super || null;
+        } else {
+            return null;
+        }
     }
 }
 

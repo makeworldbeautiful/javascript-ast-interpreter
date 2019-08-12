@@ -5,6 +5,10 @@ module.exports = {
         let prop = node.property.name;
         if(type === 'set'){
             return obj[prop] = value;
+        } else if(type === 'call') {
+            return function call(args){
+                return obj[prop].apply(obj, args);
+            }
         } else {
             return obj[prop];
         }

@@ -3,7 +3,7 @@ module.exports = (body, scope, reduce) => {
         switch(node.type){
             case 'FunctionDeclaration':
                 if(node.id){
-                    let v = reduce(node, scope);
+                    let v = reduce(node, scope, 'prescan');
                     scope.set('function', node.id.name, v);
                 }
                 break;
@@ -16,18 +16,4 @@ module.exports = (body, scope, reduce) => {
                 break;
         }
     });
-    // body.forEach(node => {
-    //     switch(node.type){
-    //         case 'FunctionDeclaration':
-    //             // let v = run(node, scope);
-    //             // console.log(v)
-    //             // console.log(scope.get(node.id.name).value)
-    //             if(node.id){
-    //                 let v = run(node, scope);
-    //                 console.log(v)
-    //             }
-                
-    //             break;
-    //     }
-    // });
 };

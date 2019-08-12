@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/acorn/6.2.1/acorn.min.js"></script> -->
+<script type="text/javascript" src="../libs/acorn/6.2.1/acorn.min.js"></script>
+<script type="text/javascript" src="../build/index.js"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+cmd = cmd(acorn)
+const output = cmd({
+    // window: {},
+    console,
+    Object,
+    Array,
+}, `
+class A {
+    constructor(name){
+        this.name = name;
+        this._type = 'A';
+    }
+    getName(){
+        return this.name;
+    }
+    get type(){
+        return this._type;
+    }
+    set type(val){
+        this._type = val;
+    }
+}
+
+class B extends A {
+    constructor(name){
+        super(name + ':B');
+    }
+}
+
+let b = new B('this is B')
+console.log(b.getName())
+
+`);
+</script>
+
+</body>
+</html>

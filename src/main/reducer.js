@@ -1,5 +1,8 @@
 module.exports = branches => {
     const reduce = (node, scope, ...extParams) => {
+        if(!node){
+            return void 0;
+        }
         let branch = branches.find(b => b.types.indexOf(node.type) > -1);
         if(!branch){
             console.log(node)
