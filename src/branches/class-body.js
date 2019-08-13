@@ -9,11 +9,18 @@ const {
 module.exports = {
     types: ['ClassBody'],
     reduce: (node, scope, reduce, superClass) => {
-
-        const props = {}, superProto = {};
+        /**
+         * 类自身proto
+         */
+        const proto = {}
+            /**
+             * 父类proto
+             */
+            , superProto = {}
+            ;
         if(superClass){
             Object.assign(superProto, Object.getOwnPropertyDescriptors(superClass.prototype));
-            Object.assign(props, superProto);
+            Object.assign(proto, superProto);
         }
        
         const methods = node.body.map(n => reduce(n, scope, 'class', superClass, superProto));
@@ -35,19 +42,19 @@ module.exports = {
         
         methods.forEach(m => {
             // console.log(1111, m.key, Object.getOwnPropertyDescriptor(cls.prototype, m.key))
-            if(!(m.key in props)){
-                props[m.key] = {
+            if(!(m.key in proto)){
+                proto[m.key] = {
                     configurable: true,
                     enumerable: false,
                 };
             }
             switch(m.kind){
                 case 'method':
-                    props[m.key].value = m.value;
+                    proto[m.key].value = m.value;
                     break;
                 case 'get':
                 case 'set':
-                    props[m.key][m.kind] = function(...args){
+                    proto[m.key][m.kind] = function(...args){
                         // console.log(666, m.kind, scope.super, scope.context)
                         // return m.value.bind(this)(...args)
                         return m.value.apply(scope.context, args);
@@ -67,7 +74,7 @@ module.exports = {
         // console.log(922222, props)
 
 
-        Object.defineProperties(cls.prototype, props);
+        Object.defineProperties(cls.prototype, proto);
         cls.prototype.constructor = cls;
         // console.log(99999,new cls('aaa').type)
         return cls;
